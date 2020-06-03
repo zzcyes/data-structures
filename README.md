@@ -1,2 +1,2 @@
 # DataStructures
-JavaScript Data Structures
+Learning data structures
