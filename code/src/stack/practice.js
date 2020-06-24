@@ -1,4 +1,4 @@
-const Stack = require("./stackArray");
+const Stack = require("./stack-array");
 
 const { log } = require("../utils");
 /**
