@@ -64,19 +64,97 @@ export default class BinarySearchTree<T> {
     }
   }
 
-  search(key: T) {
-    //   if(this.root.key == key){
-    //     return this,
-    //   }
+  search(key: T): boolean {
+    return this.searchNode(this.root, key);
   }
 
-  min() {}
+  private searchNode(node: Node<T>, key: T): boolean {
+    if (node == null) {
+      return false;
+    }
 
-  max() {}
+    if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
+      return this.searchNode(node.left, key);
+    }
 
-  remove() {}
+    if (this.compareFn(key, node.key) === Compare.BIGGER_THAN) {
+      return this.searchNode(node.right, key);
+    }
+
+    // key is equal to node.key
+    return true;
+  }
+
+  min() {
+    return this.minNode(this.root);
+  }
+
+  protected minNode(node: Node<T>) {
+    let current = node;
+    while (current != null && current.left != null) {
+      current = current.left;
+    }
+    return current;
+  }
+
+  max() {
+    return this.maxNode(this.root);
+  }
+
+  protected maxNode(node: Node<T>) {
+    let current = node;
+    while (current != null && current.right != null) {
+      current = current.right;
+    }
+    return current;
+  }
 
   getRoot() {
     return this.root;
+  }
+
+  remove(key: T) {
+    this.root = this.removeNode(this.root, key);
+  }
+
+  private removeNode(node: Node<T>, key: T) {
+    if (node == null) {
+      return null;
+    }
+
+    if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
+      node.left = this.removeNode(node.left, key);
+      return node;
+    } else if (this.compareFn(key, node.key) === Compare.BIGGER_THAN) {
+      node.right = this.removeNode(node.right, key);
+      return node;
+    } else {
+      // key is equal to node.item
+      // 1 - 移除一个叶节点
+      // 2 - 移除有一个左侧或右侧子节点的节点
+      // 3 - 移除有两个子节点的节点
+
+      //case 1
+      if (node.left == null && node.right == null) {
+        node = null;
+        return node;
+      }
+
+      //case 2
+      if (node.left == null) {
+        node = node.right;
+        return node;
+      } else if (node.right == null) {
+        node = node.left;
+        return node;
+      }
+
+      //case 3
+      // 右边子树中最小的节点,继承者
+      const aux = this.minNode(node.right);
+      node.key = aux.key;
+      node.right = this.removeNode(node.right, aux.key);
+      return node;
+    }
   }
 }
