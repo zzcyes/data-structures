@@ -150,7 +150,7 @@ export default class BinarySearchTree<T> {
       }
 
       //case 3
-      // 右边子树中最小的节点,继承者
+      // 寻找右边子树中最小的节点,它即为继承者
       const aux = this.minNode(node.right);
       node.key = aux.key;
       node.right = this.removeNode(node.right, aux.key);

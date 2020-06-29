@@ -5,6 +5,8 @@ export class Node<K> {
 
   constructor(public key: K) {
     // this.key = key;
+    this.left = null;
+    this.right = null;
   }
 
   toString() {
