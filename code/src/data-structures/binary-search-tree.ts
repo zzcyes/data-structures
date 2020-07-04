@@ -28,6 +28,7 @@ export default class BinarySearchTree<T> {
     }
   }
 
+  // 中序遍历（深度优先遍历）
   inOrderTraverse(callback: Function) {
     this.inOrderTraverseNode(this.root, callback);
   }
@@ -40,6 +41,7 @@ export default class BinarySearchTree<T> {
     }
   }
 
+  // 中序遍历（深度优先遍历）
   preOrderTraverse(callback: Function) {
     this.preOrderTraverseNode(this.root, callback);
   }
@@ -52,6 +54,7 @@ export default class BinarySearchTree<T> {
     }
   }
 
+  // 后序遍历（深度优先遍历）
   postOrderTraverse(callback: Function) {
     this.postOrderTraverseNode(this.root, callback);
   }
@@ -62,6 +65,15 @@ export default class BinarySearchTree<T> {
       this.postOrderTraverseNode(node.right, callback);
       callback(node.key);
     }
+  }
+
+  // 层序遍历（广度优先遍历）
+  sequenceTraverse() {
+    if (this.root == null) {
+      console.log(this.root);
+    }
+    console.log(this.root);
+    // let stack = [];
   }
 
   search(key: T): boolean {
