@@ -16,7 +16,7 @@ class LinkedList {
         let newNode = new Node(item);
         let currNode = this.head;
         while (currNode.next !== null) {
-            console.log(currNode.next.element);
+            // console.log(currNode.next.element);
             currNode = currNode.next;
         }
         currNode.next = newNode;
@@ -61,11 +61,15 @@ class LinkedList {
 
     //显示链表
     display() {
+        const logArray = [];
         let currNode = this.head;
         while (currNode.next !== null) {
-            console.log(currNode.next.element);
+            // console.log(currNode.next.element);
+            logArray.push(currNode.next.element)
             currNode = currNode.next;
         }
+        console.debug(logArray.join("->"));
+        return logArray;
     }
 }
 
